@@ -5,7 +5,7 @@
         </button>
         <Menu as="div" class="relative inline-block text-left">
             <MenuButton class="flex items-center">
-                <small>John Smith</small>
+                <small>{{currentUser.name ?? "Admin"}}</small>
                 <ChevronDownIcon
                     class="h-5 w-5 text-pink-200 hover:text-violet-100"
                     aria-hidden="true"
@@ -41,6 +41,7 @@
                         </MenuItem>
                         <MenuItem v-slot="{ active }">
                             <button
+                                @click="logout"
                                 :class="[
                   active ? 'bg-pink-400 text-white' : 'text-gray-900',
                   'group flex w-full items-center rounded-md px-2 py-2 text-sm',
@@ -65,8 +66,20 @@
 import {MenuIcon, LogoutIcon, UserIcon} from '@heroicons/vue/outline'
 import {Menu, MenuButton, MenuItems, MenuItem} from '@headlessui/vue'
 import {ChevronDownIcon} from '@heroicons/vue/solid'
+import store from "../store";
+import router from "../router";
+import {computed} from "vue";
 
 const emit = defineEmits(['toggle-sidebar'])
+
+const currentUser = computed(() => store.state.user.data);
+
+function logout() {
+    store.dispatch('logout')
+        .then(() => {
+            router.push({name: 'login'})
+        })
+}
 
 </script>
 

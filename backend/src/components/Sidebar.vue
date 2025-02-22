@@ -5,7 +5,7 @@
       <span class="mr-2 text-gray-50">
         <HomeIcon class="w-5"/>
       </span>
-            <span class="text-xs">
+            <span class="text-s">
         Dashboard
       </span>
         </router-link>
@@ -14,7 +14,7 @@
       <span class="mr-2 text-gray-50">
         <ViewListIcon class="w-5"/>
       </span>
-            <span class="text-xs">
+            <span class="text-s">
         Products
       </span>
         </router-link>
@@ -23,7 +23,7 @@
       <span class="mr-2 text-gray-50">
         <UsersIcon class="w-5"/>
       </span>
-            <span class="text-xs">
+            <span class="text-s">
         Users
       </span>
         </router-link>
@@ -32,7 +32,7 @@
       <span class="mr-2 text-gray-50">
         <ChartBarIcon class="w-5"/>
       </span>
-            <span class="text-xs">
+            <span class="text-s">
         Reports
       </span>
         </router-link>
