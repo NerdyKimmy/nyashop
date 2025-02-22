@@ -6,7 +6,7 @@ import GuestLayout from "../components/GuestLayout.vue";
 <template>
 
 <GuestLayout title="Request new password">
-        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <form class="space-y-6" action="#" method="POST">
                 <div>
                     <div class="flex items-center justify-between">
                         <label for="email" class="block text-sm/6 font-medium text-gray-600
@@ -23,13 +23,11 @@ import GuestLayout from "../components/GuestLayout.vue";
 
 
 
-                <div class="mt-6">
+                <div>
                     <button type="submit" class="flex w-full justify-center rounded-md bg-pink-300 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-pink-400 ">Submit</button>
 
                 </div>
-
-
-        </div>
+            </form>
 </GuestLayout>
 </template>
 

@@ -5,7 +5,7 @@ import GuestLayout from "../components/GuestLayout.vue";
 
 <template>
 <GuestLayout title="Sign in to your account">
-
+            <form class="space-y-6" action="#" method="POST">
                 <div>
                     <label for="email" class="block text-sm/6 font-medium text-gray-600
 ">Email address</label>
@@ -33,6 +33,7 @@ import GuestLayout from "../components/GuestLayout.vue";
                     <button type="submit" class="flex w-full justify-center rounded-md bg-pink-300 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-pink-400 ">Sign in</button>
 
                 </div>
+            </form>
 </GuestLayout>
 </template>
 
