@@ -1,6 +1,3 @@
-/**
- * Created by Zura on 12/25/2021.
- */
 import axios from "axios";
 import store from "./store";
 import {useRouter} from "vue-router";
@@ -19,7 +16,7 @@ axiosClient.interceptors.request.use(config => {
 axiosClient.interceptors.response.use(response => {
     return response;
 }, error => {
-    debugger;
+   // debugger;
     if (error.response.status === 401) {
         sessionStorage.removeItem('TOKEN')
         router.push({name: 'login'})
