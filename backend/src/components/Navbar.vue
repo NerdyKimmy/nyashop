@@ -5,7 +5,7 @@
         </button>
         <Menu as="div" class="relative inline-block text-left">
             <MenuButton class="flex items-center">
-                <small>{{currentUser.name }}</small>
+                <p>{{currentUser.name }}</p>
                 <ChevronDownIcon
                     class="h-5 w-5 text-pink-200 hover:text-violet-100"
                     aria-hidden="true"
