@@ -11,7 +11,7 @@ let errorMsg = ref("");
 const user = {
     email: '',
     password: '',
-    remember: false
+    remember: true
 }
 
 function login() {

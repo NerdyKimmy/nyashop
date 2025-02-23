@@ -16,31 +16,34 @@
 </template>
 
 <script setup>
-import {ref, onMounted, onUnmounted} from 'vue'
+import {ref, computed, onMounted, onUnmounted} from 'vue'
 import Sidebar from "./Sidebar.vue";
 import Navbar from "./Navbar.vue";
+import store from "../store";
+import Spinner from "./core/Spinner.vue";
 
 const {title} = defineProps({
-    title: String
+  title: String
 })
-
 const sidebarOpened = ref(true);
+const currentUser = computed(() => store.state.user.data);
 
 function toggleSidebar() {
-    sidebarOpened.value = !sidebarOpened.value
+  sidebarOpened.value = !sidebarOpened.value
 }
 
 function updateSidebarState() {
-    sidebarOpened.value = window.outerWidth > 768;
+  sidebarOpened.value = window.outerWidth > 768;
 }
 
 onMounted(() => {
-    updateSidebarState();
-    window.addEventListener('resize', updateSidebarState)
+  store.dispatch('getUser')
+  updateSidebarState();
+  window.addEventListener('resize', updateSidebarState)
 })
 
 onUnmounted(() => {
-    window.removeEventListener('resize', updateSidebarState)
+  window.removeEventListener('resize', updateSidebarState)
 })
 
 </script>
