@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(\App\Models\User::class, 'user_id');
             $table->foreignId('product_id')->references('id')->on('products');
+
             $table->timestamps();
         });
     }

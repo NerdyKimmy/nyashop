@@ -47,7 +47,16 @@
                                     <CustomInput class="mb-2" v-model="product.title" label="Product Title"/>
                                     <CustomInput type="file" class="mb-2" label="Product Image" @change="file => product.image = file"/>
                                     <CustomInput type="textarea" class="mb-2" v-model="product.description" label="Description"/>
-                                    <CustomInput type="number" class="mb-2" v-model="product.price" label="Price" prepend="₴"/>
+                                    <CustomInput
+                                        type="number"
+                                        class="mb-2"
+                                        v-model="product.price"
+                                        label="Price"
+                                        prepend="₴"
+                                        min="0.5"
+                                        step="0.5"
+                                        @input="validatePrice"
+                                    />
                                 </div>
                                 <footer class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                                     <button type="submit"
@@ -104,6 +113,13 @@ function closeModal() {
     emit('close')
 }
 
+function validatePrice() {
+    // Якщо значення ціни менше або дорівнює 0, встановлюємо мінімальне значення
+    if (product.value.price <= 0) {
+        product.value.price = 0.5;
+    }
+}
+
 function onSubmit() {
     loading.value = true
     if (product.value.id) {
@@ -130,4 +146,3 @@ function onSubmit() {
     }
 }
 </script>
-

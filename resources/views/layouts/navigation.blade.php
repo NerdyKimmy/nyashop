@@ -1,9 +1,13 @@
 <header
-    x-data="{mobileMenuOpen: false}"
+    x-data="{
+        mobileMenuOpen: false,
+        cartItemsCount: {{ \App\Helpers\Cart::getCartItemsCount() }},
+    }"
+    @cart-change.window="cartItemsCount = $event.detail.count"
     class="flex justify-between bg-pink-300 shadow-md text-white"
 >
     <div>
-        <a href="{{ route('home') }}" class="block py-navbar-item pl-5"> NyaShop^^ </a>
+        <a href="{{ route('home') }}" class="block py-navbar-item pl-5 text-base"> NyaShop^^ </a>
     </div>
     <!-- Responsive Menu -->
     <div
@@ -13,7 +17,7 @@
         <ul>
             <li>
                 <a
-                    href="/src/cart.html"
+                    href="{{route('cart.index')}}"
                     class="relative flex items-center justify-between py-2 px-3 transition-colors hover:bg-pink-400"
                 >
                     <div class="flex items-center">
@@ -35,9 +39,9 @@
                     </div>
                     <!-- Cart Items Counter -->
                     <small
-                        x-show="$store.header.cartItems"
+                        x-show="CartItemsCount"
                         x-transition
-                        x-text="$store.header.cartItems"
+                        x-text="CartItemsCount"
                         x-cloak
                         class="py-[2px] px-[8px] rounded-full bg-red-400"
                     ></small>
@@ -223,7 +227,7 @@
         <ul class="grid grid-flow-col items-center">
             <li>
                 <a
-                    href="/src/cart.html"
+                    href="{{route('cart.index')}}"
                     class="relative inline-flex items-center py-navbar-item px-navbar-item hover:bg-pink-400"
                 >
                     <svg
@@ -240,12 +244,12 @@
                             d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                         />
                     </svg>
-                    Cart
+                    <span class="text-base">Cart</span>
                     <small
-                        x-show="$store.header.cartItems"
+                        x-show="cartItemsCount"
                         x-transition
                         x-cloak
-                        x-text="$store.header.cartItems"
+                        x-text="cartItemsCount"
                         class="absolute z-[100] top-4 -right-3 py-[2px] px-[8px] rounded-full bg-red-400"
                     ></small>
                 </a>
@@ -271,7 +275,8 @@
                       d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                   />
                 </svg>
-                My Account
+                  <span class="text-base"> My Account</span>
+
               </span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -313,37 +318,6 @@
                                     />
                                 </svg>
                                 My Profile
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="/src/watchlist.html"
-                                class="flex items-center justify-between px-3 py-2 hover:bg-pink-400"
-                            >
-                                <div class="flex items-center">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="h-5 w-5 mr-2"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                                        />
-                                    </svg>
-                                    Watchlist
-                                </div>
-
-                                <small
-                                    x-show="$store.header.watchlistItems"
-                                    x-transition
-                                    x-text="$store.header.watchlistItems"
-                                    class="py-[2px] px-[8px] rounded-full bg-red-400"
-                                ></small>
                             </a>
                         </li>
                         <li>

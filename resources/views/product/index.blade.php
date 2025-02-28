@@ -14,6 +14,7 @@
                     'image' => $product->image,
                     'title' => $product->title,
                     'price' => $product->price,
+                    'addToCartUrl' => route('cart.add', $product)
                 ]) }})"
                 class=" flex flex-col h-full border border-1 border-gray-200 rounded-md hover:border-pink-300 transition-colors bg-white"
             >
@@ -38,7 +39,7 @@
                     <h5 class="font-bold">₴{{$product->price}}</h5>
                 </div>
                 <div class="p-4">
-                    <button class="btn-primary" @click="addToCart(id)">
+                    <button class="btn-primary" @click="addToCart()">
                         Add to Cart
                     </button>
                 </div>
