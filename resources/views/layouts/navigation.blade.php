@@ -90,7 +90,7 @@
                         class="z-10 right-0 bg-pink-300 py-2"
                     >
                         <li>
-                            <a href="/src/profile.html" class="flex px-3 py-2 hover:bg-pink-400">
+                            <a href="{{route('profile')}}" class="flex px-3 py-2 hover:bg-pink-400">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     class="h-5 w-5 mr-2"
@@ -300,7 +300,7 @@
                     >
                         <li>
                             <a
-                                href="/src/profile.html"
+                                href="{{route('profile')}}"
                                 class="flex px-3 py-2 hover:bg-pink-400"
                             >
                                 <svg

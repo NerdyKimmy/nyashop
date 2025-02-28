@@ -1,30 +1,34 @@
-
-@props(['disabled' => false, 'label' => false, 'errors' => null])
-
+@props(['disabled' => false, 'errors', 'type' => 'text', 'label' => false])
 
 <?php
-$errors = $errors ?? session('errors') ?? new \Illuminate\Support\ViewErrorBag;
-
-$errorClasses = 'border-red-400 focus:border-red-400 ring-1 ring-red-400 focus:ring-red-400';
-$defaultClasses = 'border-gray-300 focus:border-pink-400 focus:outline-none focus:ring-0 rounded-md w-full';
+/** @var \Illuminate\Support\ViewErrorBag $errors */
+/** @var \Illuminate\View\ComponentAttributeBag  $attributes */
+?>
+<?php
+$errorClasses = 'border-red-600 focus:border-red-600 ring-1 ring-red-600 focus:ring-red-600';
+$defaultClasses = '';
 $successClasses = 'border-emerald-500 focus:border-emerald-500 ring-1 ring-emerald-500 focus:ring-emerald-500';
 
-$name = $attributes->get('name');
+$attributeName = preg_replace('/(\w+)\[(\w+)]/', '$1.$2', $attributes['name']);
 ?>
-@if ($label)
-    <label for="{{ $attributes->get('id') ?? $name }}">{{ $label }}</label>
-@endif
-
-<input
-    {{ $disabled ? 'disabled' : '' }}
-    {!! $attributes->merge([
-        'class' => $defaultClasses . ' ' . ($errors->has($name)
-            ? $errorClasses
-            : (old($name) ? $successClasses : ''))
-    ]) !!}
->
-
-@error($name)
-<small class="text-red-600"> {{ $message }}</small>
-@enderror
-
+<div>
+    @if ($label)
+        <label>{{$label}}</label>
+    @endif
+    @if ($type === 'select')
+        <select {{ $disabled ? 'disabled' : '' }} {!! $attributes->merge([
+            'class' => 'border-gray-300 focus:border-pink-400 focus:outline-none focus:ring-pink-400 rounded-md w-full ' .
+             ($errors->has($attributeName) ? $errorClasses : (old($attributeName) ? $successClasses :$defaultClasses))
+        ]) !!}>
+            {{ $slot }}
+        </select>
+    @else
+        <input {{ $disabled ? 'disabled' : '' }} type="{{$type}}" {!! $attributes->merge([
+            'class' => 'border-gray-300 focus:border-pink-400 focus:outline-none focus:ring-pink-400 rounded-md w-full ' .
+             ($errors->has($attributeName) ? $errorClasses : (old($attributeName) ? $successClasses :$defaultClasses))
+        ]) !!}>
+    @endif
+    @error($attributeName)
+    <small class="text-red-600"> {{ $message }}</small>
+    @enderror
+</div>

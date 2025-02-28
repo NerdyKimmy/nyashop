@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Helpers\Cart;
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -44,10 +45,17 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
+        $customer = new Customer();
+        $names = explode(" ",$user->name);
+        $customer->user_id = $user->id;
+        $customer->first_name = $names[0];
+        $customer->last_name = $names[1] ?? '';
+        $customer->save();
+
         Auth::login($user);
 
         Cart::moveCartItemsIntoDb();
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect(route('home', absolute: false));
     }
 }
