@@ -24,8 +24,8 @@ class ProfileController extends Controller
         if (!$customer) {
             $customer = $user->customer()->create([
                 'user_id' => $user->id,
-                'first_name' => 'Default',
-                'last_name'  => 'Customer',
+                'first_name' => $user->name,
+                'last_name'  => '',
             ]);
 
         }
