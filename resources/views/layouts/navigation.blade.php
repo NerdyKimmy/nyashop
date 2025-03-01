@@ -139,7 +139,7 @@
                         </li>
                         <li class="hover:bg-pink-400">
                             <a
-                                href="/src/orders.html"
+                                href="{{ route('order.index') }}"
                                 class="flex items-center px-3 py-2 hover:bg-pink-400"
                             >
                                 <svg
@@ -322,7 +322,7 @@
                         </li>
                         <li>
                             <a
-                                href="/src/orders.html"
+                                href="{{ route('order.index') }}"
                                 class="flex px-3 py-2 hover:bg-pink-400"
                             >
                                 <svg
