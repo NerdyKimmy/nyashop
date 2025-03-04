@@ -57,14 +57,16 @@
                                         step="0.5"
                                         @input="validatePrice"
                                     />
+                                    <!-- Повідомлення про помилку для ціни -->
+                                    <div v-if="priceError" class="text-red-400 text-sm">{{ priceError }}</div>
                                 </div>
                                 <footer class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                                     <button type="submit"
-                                            class="py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-pink-400 hover:bg-pink-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ml-3">
+                                            class="py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-pink-400 hover:bg-pink-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 ml-3">
                                         Submit
                                     </button>
                                     <button type="button"
-                                            class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                                            class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                                             @click="closeModal" ref="cancelButtonRef">
                                         Cancel
                                     </button>
@@ -107,6 +109,7 @@ const show = computed({
 })
 
 const loading = ref(false)
+const priceError = ref('')  // Змінна для повідомлення про помилку ціни
 
 function closeModal() {
     show.value = false
@@ -114,13 +117,19 @@ function closeModal() {
 }
 
 function validatePrice() {
-    // Якщо значення ціни менше або дорівнює 0, встановлюємо мінімальне значення
-    if (product.value.price <= 0) {
-        product.value.price = 0.5;
+    if (product.value.price < 0) {
+        priceError.value = "Змініть ціну. Ціна не може бути менше 0.";
+    } else {
+        priceError.value = "";
     }
 }
 
 function onSubmit() {
+    // Перевірка перед відправкою форми
+    if (product.value.price < 0) {
+        priceError.value = "Змініть ціну. Ціна не може бути менше 0.";
+        return;
+    }
     loading.value = true
     if (product.value.id) {
         store.dispatch('updateProduct', product.value)
