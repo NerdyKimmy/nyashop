@@ -92,7 +92,6 @@ import axiosClient from '../axios.js'
 import Spinner from '../components/core/Spinner.vue'
 import CustomInput from '../components/core/CustomInput.vue'
 
-// Імпортуємо всі потрібні модулі з Chart.js
 import {
     Chart,
     DoughnutController,
@@ -105,7 +104,6 @@ import {
     LinearScale
 } from 'chart.js'
 
-// Реєструємо їх у Chart.js
 Chart.register(
     DoughnutController,
     ArcElement,
@@ -117,7 +115,6 @@ Chart.register(
     LinearScale
 )
 
-// Варіанти періодів
 const dateOptions = ref([
     { key: '1d', text: 'Last Day' },
     { key: '1k', text: 'Last Week' },
@@ -130,30 +127,26 @@ const dateOptions = ref([
 
 const chosenDate = ref('all')
 
-// Стан завантаження
 const loading = ref({
     customersCount: true,
     productsCount: true,
     paidOrders: true,
     totalIncome: true,
     ordersByCountry: true,
-    ordersByDay: true // додано для стовпчастої діаграми
+    ordersByDay: true
 })
 
-// Дані для карток
 const customersCount = ref(0)
 const productsCount = ref(0)
 const paidOrders = ref(0)
 const totalIncome = ref(0)
 
-// Canvas та змінні для діаграм
 const chartCanvas = ref(null)
 let chartInstance = null
 
 const barCanvas = ref(null)
 let barChartInstance = null
 
-// Функція для кругової діаграми "Orders by Country"
 function updatePieChart(countries) {
     const chartData = {
         labels: countries.map(item => item.name),
@@ -185,7 +178,7 @@ function updatePieChart(countries) {
                 plugins: {
                     legend: {
                         labels: {
-                            padding: 16 // невеликий відступ у легенді
+                            padding: 16
                         }
                     }
                 }
@@ -194,7 +187,6 @@ function updatePieChart(countries) {
     }
 }
 
-// Функція для стовпчастої діаграми "Orders by Day"
 function updateBarChart(dailyOrders) {
     const chartData = {
         labels: dailyOrders.map(item => item.date),
@@ -202,7 +194,6 @@ function updateBarChart(dailyOrders) {
             {
                 label: 'Orders',
                 data: dailyOrders.map(item => item.count),
-                // Пастельно-рожевий колір стовпців
                 backgroundColor: '#F8BBD0'
             }
         ]
@@ -221,15 +212,13 @@ function updateBarChart(dailyOrders) {
                 plugins: {
                     legend: {
                         labels: {
-                            padding: 16 // Відступ у легенді
+                            padding: 16
                         }
                     }
                 },
-                // Налаштування шкал
                 scales: {
                     y: {
                         beginAtZero: true,
-                        // Ключове: крок 1 і цілі значення на осі
                         ticks: {
                             stepSize: 1
                         }
@@ -241,11 +230,9 @@ function updateBarChart(dailyOrders) {
 }
 
 
-// Оновлюємо всі дані дашборду
 function updateDashboard() {
     const d = chosenDate.value
 
-    // Ставимо всі лоадери в true
     loading.value = {
         customersCount: true,
         productsCount: true,
@@ -255,7 +242,6 @@ function updateDashboard() {
         ordersByDay: true
     }
 
-    // 1. Active Customers
     axiosClient.get('/dashboard/customers-count', {params: {d}})
         .then(({data}) => {
             customersCount.value = data
@@ -264,7 +250,6 @@ function updateDashboard() {
             loading.value.customersCount = false
         })
 
-    // 2. Active Products
     axiosClient.get('/dashboard/products-count', {params: {d}})
         .then(({data}) => {
             productsCount.value = data
@@ -273,7 +258,6 @@ function updateDashboard() {
             loading.value.productsCount = false
         })
 
-    // 3. Paid Orders
     axiosClient.get('/dashboard/orders-count', {params: {d}})
         .then(({data}) => {
             paidOrders.value = data
@@ -282,7 +266,6 @@ function updateDashboard() {
             loading.value.paidOrders = false
         })
 
-    // 4. Total Income
     axiosClient.get('/dashboard/income-amount', {params: {d}})
         .then(({data}) => {
             totalIncome.value = new Intl.NumberFormat('en-US', {
@@ -294,7 +277,6 @@ function updateDashboard() {
             loading.value.totalIncome = false
         })
 
-    // 5. Orders by Country (для кругової діаграми)
     axiosClient.get('/dashboard/orders-by-country', {params: {d}})
         .then(({data: countries}) => {
             loading.value.ordersByCountry = false
@@ -306,7 +288,6 @@ function updateDashboard() {
             loading.value.ordersByCountry = false
         })
 
-    // 6. Orders by Day (для стовпчастої діаграми)
     axiosClient.get('/dashboard/orders-by-day', {params: {d}})
         .then(({data: dailyOrders}) => {
             loading.value.ordersByDay = false
@@ -319,12 +300,10 @@ function updateDashboard() {
         })
 }
 
-// Зміна періоду
 function onDatePickerChange() {
     updateDashboard()
 }
 
-// Завантажуємо дані при монтуванні
 onMounted(() => {
     updateDashboard()
 })
