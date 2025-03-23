@@ -27,7 +27,7 @@ class CreateUserRequest extends FormRequest
         return [
             'name' => ['required', 'max:55'],
             'email' => ['required', 'email'],
-            'password' => ['required', Password::min(8)->numbers()->letters()]
+            'password' => ['required', 'min:8', 'regex:/^[a-zA-Z0-9]+$/'],
         ];
     }
 }
