@@ -12,9 +12,7 @@
         </div>
     </div>
 
-    <!-- Блок з картками -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-3 mb-4">
-        <!-- Active Customers -->
         <div class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center justify-center">
             <label class="text-lg font-semibold block mb-2">Active Customers</label>
             <template v-if="!loading.customersCount">
@@ -23,7 +21,6 @@
             <Spinner v-else text=""/>
         </div>
 
-        <!-- Active Products -->
         <div
             class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center justify-center"
             style="animation-delay: 0.1s"
@@ -35,7 +32,6 @@
             <Spinner v-else text=""/>
         </div>
 
-        <!-- Paid Orders -->
         <div
             class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center justify-center"
             style="animation-delay: 0.2s"
@@ -47,7 +43,6 @@
             <Spinner v-else text=""/>
         </div>
 
-        <!-- Total Income -->
         <div
             class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center"
             style="animation-delay: 0.3s"
@@ -60,9 +55,7 @@
         </div>
     </div>
 
-    <!-- Блок з діаграмами -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <!-- Кругова діаграма Orders by Country -->
         <div class="bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center justify-center">
             <label class="text-lg font-semibold block mb-2">Orders by Country</label>
             <template v-if="!loading.ordersByCountry">
@@ -73,7 +66,6 @@
             <Spinner v-else text=""/>
         </div>
 
-        <!-- Стовпчаста діаграма Orders by Day -->
         <div class="bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center justify-center">
             <label class="text-lg font-semibold block mb-2">Orders by Day</label>
             <template v-if="!loading.ordersByDay">
