@@ -4,7 +4,7 @@
             <div class="flex items-center">
                 <span class="whitespace-nowrap mr-3">Per Page</span>
                 <select @change="getOrders(null)" v-model="perPage"
-                        class="appearance-none relative block w-24 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
+                        class="appearance-none relative block w-24 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-pink-400 focus:border-pink-400 focus:z-10 sm:text-sm">
                     <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="20">20</option>
@@ -15,7 +15,7 @@
             </div>
             <div>
                 <input v-model="search" @change="getOrders(null)"
-                       class="appearance-none relative block w-48 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                       class="appearance-none relative block w-48 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-pink-400 focus:border-pink-400 focus:z-10 sm:text-sm"
                        placeholder="Type to Search orders">
             </div>
         </div>
@@ -107,7 +107,7 @@
                     class="relative inline-flex items-center px-4 py-2 border text-sm font-medium whitespace-nowrap"
                     :class="[
               link.active
-                ? 'z-10 bg-indigo-50 border-indigo-500 text-indigo-600'
+                ? 'z-10 bg-pink-50 border-pink-400 text-pink-500'
                 : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50',
               i === 0 ? 'rounded-l-md' : '',
               i === orders.links.length - 1 ? 'rounded-r-md' : '',
