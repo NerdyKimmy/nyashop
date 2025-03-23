@@ -1,16 +1,5 @@
 <template>
-    <div class="mb-2 flex items-center justify-between">
-        <h1 class="text-3xl font-semibold">Dashboard</h1>
-        <div class="flex items-center">
-            <label class="mr-2">Change Date Period</label>
-            <CustomInput
-                type="select"
-                v-model="chosenDate"
-                @change="onDatePickerChange"
-                :select-options="dateOptions"
-            />
-        </div>
-    </div>
+
 
     <div class="grid grid-cols-1 md:grid-cols-4 gap-3 mb-4">
         <div class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center justify-center">
@@ -169,6 +158,7 @@ function updatePieChart(countries) {
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
+                        align: 'start',
                         labels: {
                             padding: 16
                         }

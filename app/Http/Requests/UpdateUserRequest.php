@@ -27,7 +27,7 @@ class UpdateUserRequest extends FormRequest
         return [
             'name' => ['max:55'],
             'email' => ['email'],
-            'password' => ['nullable', Password::min(8)->numbers()->letters()]
+            'password' => ['required', 'min:8', 'regex:/^[a-zA-Z0-9]+$/'],
         ];
     }
 }
